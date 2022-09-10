@@ -2,6 +2,7 @@ import 'package:expensemanager/screens/screens.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
+  int _pageIndex = 0;
   final PageController pageController = PageController();
    
   HomeScreen({Key? key}) : super(key: key);
@@ -32,7 +33,10 @@ class HomeScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: TextButton(
-                    onPressed: () => pageController.jumpToPage(0),
+                    onPressed: () {
+                      _pageIndex = 0;
+                      pageController.jumpToPage( _pageIndex );
+                    },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -44,7 +48,10 @@ class HomeScreen extends StatelessWidget {
               ),
               Expanded(
                 child: TextButton(
-                    onPressed: () => pageController.jumpToPage(1),
+                    onPressed: () {
+                      _pageIndex = 1;
+                      pageController.jumpToPage( _pageIndex );
+                    },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -56,7 +63,10 @@ class HomeScreen extends StatelessWidget {
               ),
               Expanded(
                 child: TextButton(
-                    onPressed: () => pageController.jumpToPage(2),
+                    onPressed: () {
+                      _pageIndex = 2;
+                      pageController.jumpToPage( _pageIndex );
+                    },
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
