@@ -1,3 +1,4 @@
+import 'package:expensemanager/app-routes.dart';
 import 'package:expensemanager/screens/screens.dart';
 import 'package:expensemanager/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,9 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: PageView(
         controller: pageController,
-        children: [
-          AccountsScreen(),
+        children: const [
           ExpensesScreen(),
+          AccountsScreen(),
           PeriodsScreen()
         ],
       ),
@@ -23,10 +24,13 @@ class HomeScreen extends StatelessWidget {
         onPressed: () {
           switch(actualPage) {
             case 0:
+              Navigator.of(context).pushNamed(AppRoutes.expenseForm);
               break;
             case 1:
+              Navigator.of(context).pushNamed(AppRoutes.accountForm);
               break;
             case 2:
+              Navigator.of(context).pushNamed(AppRoutes.periodForm);
               break;
           }
         },
@@ -42,27 +46,32 @@ class HomeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               BottomBarButton(
-                onPressed: pageController.jumpToPage,
-                index: 0,
-                icon: Icons.credit_card,
-                title: 'Cuentas',
+                  onPressed: _goToPage,
+                  index: 0,
+                  icon: Icons.wallet,
+                  title: 'Gastos'
               ),
               BottomBarButton(
-                onPressed: pageController.jumpToPage,
+                onPressed: _goToPage,
                 index: 1,
-                icon: Icons.wallet,
-                title: 'Gastos',
+                icon: Icons.credit_card,
+                title: 'Cuentas'
               ),
               BottomBarButton(
-                onPressed: pageController.jumpToPage,
+                onPressed: _goToPage,
                 index: 2,
                 icon: Icons.calendar_month_outlined,
-                title: 'Periodos',
+                title: 'Periodos'
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  _goToPage(int index) {
+    actualPage = index;
+    pageController.jumpToPage( actualPage );
   }
 }
