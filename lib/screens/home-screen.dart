@@ -40,31 +40,9 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         notchMargin: 5,
-        child: Padding(
-          padding: const EdgeInsets.only(right: 80),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              BottomBarButton(
-                  onPressed: _goToPage,
-                  index: 0,
-                  icon: Icons.wallet,
-                  title: 'Gastos'
-              ),
-              BottomBarButton(
-                onPressed: _goToPage,
-                index: 1,
-                icon: Icons.credit_card,
-                title: 'Cuentas'
-              ),
-              BottomBarButton(
-                onPressed: _goToPage,
-                index: 2,
-                icon: Icons.calendar_month_outlined,
-                title: 'Periodos'
-              ),
-            ],
-          ),
+        child: BottomBarOptions(
+          actualIndex: actualPage,
+          onSelect: _goToPage,
         ),
       ),
     );
