@@ -1,3 +1,4 @@
+import 'package:expensemanager/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class AccountFormScreen extends StatelessWidget {
@@ -19,19 +20,11 @@ class AccountFormScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     TextFormField(
-                      decoration: const InputDecoration(
-                          labelText: 'Nombre',
-                          border: OutlineInputBorder(),
-                          hintText: 'Nombre'
-                      ),
+                      decoration: InputDecorationUtils.getDefault(label: 'Nombre'),
                     ),
                     const SizedBox(height: 15),
                     TextFormField(
-                      decoration: const InputDecoration(
-                          labelText: 'Tipo',
-                          border: OutlineInputBorder(),
-                          hintText: 'Tipo'
-                      ),
+                      decoration: InputDecorationUtils.getDefault(label: 'Tipo'),
                     ),
                     const SizedBox(height: 15),
                     Row(
