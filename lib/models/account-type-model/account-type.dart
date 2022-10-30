@@ -1,8 +1,13 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-class AccountType {
+import 'package:expensemanager/models/catalog.dart';
+
+class AccountType extends Catalog {
+  @override
   final int id;
+
+  @override
   final String description;
 
   AccountType({required this.id, required this.description});
@@ -19,6 +24,11 @@ class AccountType {
   }
 
   static List<AccountType> listFromString(String str) {
-    return (json.decode( str ) as List).map((e) => AccountType.fromJson( e )).toList();
+    return (json.decode( str ) as List).map((e) => AccountType.fromMap( e )).toList();
+  }
+
+  @override
+  String toString() {
+    return 'AccountType{id: $id, description: $description}';
   }
 }

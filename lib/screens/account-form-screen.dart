@@ -1,4 +1,6 @@
+import 'package:expensemanager/models/account-type-model/account-type-model.dart';
 import 'package:expensemanager/utils/utils.dart';
+import 'package:expensemanager/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class AccountFormScreen extends StatelessWidget {
@@ -21,9 +23,11 @@ class AccountFormScreen extends StatelessWidget {
                   children: [
                     TextFormField(
                       decoration: InputDecorationUtils.getDefault(label: 'Nombre'),
+                      textInputAction: TextInputAction.next,
                     ),
                     const SizedBox(height: 15),
-                    TextFormField(
+                    Selector<AccountType>(
+                      fetchData: AccountTypeWebService().getList,
                       decoration: InputDecorationUtils.getDefault(label: 'Tipo'),
                     ),
                     const SizedBox(height: 15),
