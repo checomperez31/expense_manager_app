@@ -12,6 +12,11 @@ class AccountType extends Catalog {
 
   AccountType({required this.id, required this.description});
 
+  Map<String, dynamic> toMap() => {
+    'id': id,
+    'description': description,
+  };
+
   factory AccountType.fromMap(Map<String, dynamic> json) => AccountType(
     id: json['id'],
     description: json['description'],
