@@ -24,7 +24,11 @@ class _SelectDialogState<X extends Catalog> extends State<SelectDialog<X>> {
         title: Text(widget.title),
       ),
       body: RefreshIndicator(
-        onRefresh: () async {},
+        onRefresh: () async {
+          fetchData().then((value) {
+            setState(() => elements = value);
+          });
+        },
         child: ListView(
           children: elements.map((e) => ListTile(
             onTap: () => Navigator.of(context).pop( e ),

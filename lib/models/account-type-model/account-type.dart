@@ -4,11 +4,10 @@ import 'dart:typed_data';
 import 'package:expensemanager/models/catalog.dart';
 
 class AccountType extends Catalog {
-  @override
-  final int id;
+  int? id;
 
   @override
-  final String description;
+  String? description;
 
   AccountType({required this.id, required this.description});
 
@@ -16,6 +15,9 @@ class AccountType extends Catalog {
     'id': id,
     'description': description,
   };
+
+  @override
+  int? get identifier => id;
 
   factory AccountType.fromMap(Map<String, dynamic> json) => AccountType(
     id: json['id'],

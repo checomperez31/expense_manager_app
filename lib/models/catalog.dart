@@ -1,4 +1,4 @@
 abstract class Catalog {
-  dynamic get id;
+  dynamic get identifier;
   dynamic get description;
 }

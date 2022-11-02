@@ -1,3 +1,8 @@
+import 'package:expensemanager/models/account/account-service.dart';
+import 'package:expensemanager/models/account/account.dart';
+import 'package:expensemanager/utils/input-decoration.dart';
+import 'package:expensemanager/widgets/selector-input.dart';
+import 'package:expensemanager/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class PeriodFormScreen extends StatelessWidget {
@@ -42,12 +47,13 @@ class PeriodFormScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 15),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            labelText: 'Cuenta',
-                            border: OutlineInputBorder(),
-                            hintText: 'Cuenta'
-                        ),
+                      DateInput(
+                        decoration: InputDecorationUtils.getDefault(label: 'Fecha final'),
+                      ),
+                      const SizedBox(height: 15),
+                      SelectorInput<Account>(
+                        fetchData: AccountService().getList,
+                        decoration: InputDecorationUtils.getDefault(label: 'Cuenta'),
                       ),
                       const SizedBox(height: 15),
                       Row(

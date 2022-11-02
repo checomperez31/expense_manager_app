@@ -29,9 +29,7 @@ class AccountFormProvider extends ChangeNotifier {
   }
 
   save() async {
-    print( _entity.toMap() );
     final service = AccountService();
     final res = await service.create( _entity );
-    print( res );
   }
 }
