@@ -7,14 +7,14 @@ class SelectorInput<X extends Catalog> extends StatefulWidget {
   final InputDecoration decoration;
   final Future<List<X>> Function() fetchData;
   final void Function(X)? onChange;
-  final X? initialData;
+  final X? initialValue;
 
   const SelectorInput({
     Key? key,
     this.decoration = const InputDecoration(),
     required this.fetchData,
     this.onChange,
-    this.initialData
+    this.initialValue
   }) : super(key: key);
 
   @override
@@ -27,8 +27,8 @@ class _SelectorInputState<X extends Catalog> extends State<SelectorInput<X>> {
   @override
   void initState() {
     super.initState();
-    if ( widget.initialData != null ) {
-      controller.text = widget.initialData!.description;
+    if ( widget.initialValue != null ) {
+      controller.text = widget.initialValue!.description;
     }
   }
 

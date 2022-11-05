@@ -4,9 +4,17 @@ import 'package:intl/intl.dart';
 
 class DateInput extends StatefulWidget {
   final InputDecoration decoration;
+  final DateTime? initialValue;
+  final DateTime? firstDate;
+  final DateTime? lastDate;
+  final void Function(DateTime)? onChange;
   const DateInput({
     Key? key,
-    this.decoration = const InputDecoration()
+    this.decoration = const InputDecoration(),
+    this.initialValue,
+    this.firstDate,
+    this.lastDate,
+    this.onChange
   }) : super(key: key);
 
   @override
@@ -15,6 +23,16 @@ class DateInput extends StatefulWidget {
 
 class _DateInputState extends State<DateInput> {
   TextEditingController controller = TextEditingController();
+  String dateFormat = 'dd/MM/yyyy';
+
+
+  @override
+  void initState() {
+    super.initState();
+    if ( widget.initialValue != null ) {
+      setValue(widget.initialValue!, emit: false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +45,24 @@ class _DateInputState extends State<DateInput> {
   }
 
   showDateDialog(BuildContext context) {
+    final now = DateTime.now();
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime.now(),
-      lastDate: DateTime.now()
+      firstDate: widget.firstDate ?? now.subtract(const Duration(days: 18250)),
+      lastDate: widget.lastDate ?? now.add(const Duration(days: 365))
     ).then((value) {
       if ( value != null ) {
-        controller.text = DateFormat('dd/MM/yyyy').format(value);
+        setValue( value );
       }
     });
+  }
+
+  setValue(DateTime value, {emit = true}) {
+    controller.text = DateFormat( dateFormat ).format(value);
+    if ( emit && widget.onChange != null ) {
+      widget.onChange!( value );
+    }
   }
 }
 

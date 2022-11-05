@@ -35,7 +35,7 @@ class AccountFormScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 15),
                           SelectorInput<AccountType>(
-                            initialData: provider.type,
+                            initialValue: provider.type,
                             fetchData: AccountTypeWebService().getList,
                             decoration: InputDecorationUtils.getDefault(label: 'Tipo'),
                             onChange: (value) => provider.type = value,
