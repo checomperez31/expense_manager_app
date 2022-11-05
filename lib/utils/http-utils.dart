@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 mixin HttpUtils {
   Future<http.Response> makePost(String address, String path, [Object? body]) async {
     Uri uri = getUri(address, path);
-    print('Making request to $uri');
+    print('Making request to $uri with body: $body');
     return http.post(uri, body: body, headers: {
       'content-type': 'application/json'
     });
@@ -26,7 +26,7 @@ mixin HttpUtils {
   }
 
   http.Response process(http.Response response) {
-    if ( response.statusCode != 200 ) throw 'Error in request';
+    if ( response.statusCode != 200 ) throw 'Error in request, code: ${response.statusCode}';
     return response;
   }
 }

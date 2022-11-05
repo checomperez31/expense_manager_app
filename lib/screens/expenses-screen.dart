@@ -1,10 +1,22 @@
+import 'package:expensemanager/screens/expenses-list-provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ExpensesScreen extends StatelessWidget {
   const ExpensesScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('ExpensesScreen'));
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+    create: (_) => ExpenseListProvider(),
+    child: Consumer<ExpenseListProvider>(
+      builder: (_, provider, __) => RefreshIndicator(
+        onRefresh: provider.refreshData,
+        child: ListView(
+          children: provider.elements.map((e) => ListTile(
+            title: Text(e.description ?? 'Sin nombre'),
+          )).toList(),
+        ),
+      ),
+    ),
+  );
 }

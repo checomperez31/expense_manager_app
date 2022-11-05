@@ -32,7 +32,7 @@ class _SelectDialogState<X extends Catalog> extends State<SelectDialog<X>> {
         child: ListView(
           children: elements.map((e) => ListTile(
             onTap: () => Navigator.of(context).pop( e ),
-            title: Text(e.description),
+            title: Text(e.description ?? 'SIN DESCRIPCION'),
           )).toList(),
         ),
       ),

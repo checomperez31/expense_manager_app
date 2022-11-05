@@ -1,5 +1,9 @@
 import 'package:expensemanager/models/account/account-service.dart';
 import 'package:expensemanager/models/account/account.dart';
+import 'package:expensemanager/models/expense-type/expense-type-service.dart';
+import 'package:expensemanager/models/expense-type/expense-type.dart';
+import 'package:expensemanager/models/period/period-service.dart';
+import 'package:expensemanager/models/period/period.dart';
 import 'package:expensemanager/screens/expense-form-provider.dart';
 import 'package:expensemanager/utils/input-decoration.dart';
 import 'package:expensemanager/widgets/widgets.dart';
@@ -29,8 +33,9 @@ class ExpenseFormScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           SelectorInput<Account>(
-                            fetchData: () => AccountService().getList(),
+                            fetchData: AccountService().getList,
                             decoration: InputDecorationUtils.getDefault(label: 'Cuenta'),
+                            initialValue: provider.account,
                             onChange: (value) => provider.account = value,
                           ),
                           const SizedBox(height: 15),
@@ -40,24 +45,30 @@ class ExpenseFormScreen extends StatelessWidget {
                             onChanged: (value) => provider.description = value,
                           ),
                           const SizedBox(height: 15),
-                          TextFormField(
+                          SelectorInput<ExpenseType>(
+                            fetchData: ExpenseTypeService().getList,
                             decoration: InputDecorationUtils.getDefault(label: 'Tipo'),
+                            initialValue: provider.type,
+                            onChange: (value) => provider.type = value,
                           ),
                           const SizedBox(height: 15),
                           TextFormField(
-                            initialValue: provider.quantity,
+                            initialValue: provider.amount,
                             decoration: InputDecorationUtils.getDefault(label: 'Cantidad'),
-                            onChanged: (value) => provider.quantity = value,
+                            onChanged: (value) => provider.amount = value,
                           ),
                           const SizedBox(height: 15),
-                          TextFormField(
+                          SelectorInput<Period>(
+                            fetchData: PeriodService().getList,
                             decoration: InputDecorationUtils.getDefault(label: 'Periodo'),
+                            initialValue: provider.period,
+                            onChange: (value) => provider.period = value,
                           ),
                           const SizedBox(height: 15),
                           DateInput(
-                            initialValue: provider.date,
+                            initialValue: provider.expenseDate,
                             decoration: InputDecorationUtils.getDefault(label: 'Fecha'),
-                            onChange: (value) => provider.date = value,
+                            onChange: (value) => provider.expenseDate = value,
                           ),
                           const SizedBox(height: 15),
                           Row(

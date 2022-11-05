@@ -1,6 +1,8 @@
 import 'package:expensemanager/models/account/account.dart';
+import 'package:expensemanager/models/expense-type/expense-type.dart';
+import 'package:expensemanager/models/expense/expense-service.dart';
 import 'package:expensemanager/models/expense/expense.dart';
-import 'package:expensemanager/models/period.dart';
+import 'package:expensemanager/models/period/period.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseFormProvider extends ChangeNotifier {
@@ -20,18 +22,18 @@ class ExpenseFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String? get type => _entity.type;
+  ExpenseType? get type => _entity.type;
 
-  set type(String? value) {
+  set type(ExpenseType? value) {
     _entity.type = value;
     notifyListeners();
   }
 
-  String? get quantity => _entity.quantity?.toString();
+  String? get amount => _entity.amount?.toString();
 
-  set quantity(String? value) {
+  set amount(String? value) {
     try {
-      _entity.quantity = int.parse(value ?? '');
+      _entity.amount = int.parse(value ?? '');
     } catch (e) {}
     notifyListeners();
   }
@@ -43,14 +45,15 @@ class ExpenseFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  DateTime? get date => _entity.date;
+  DateTime? get expenseDate => _entity.expenseDate;
 
-  set date(DateTime? value) {
-    _entity.date = value;
+  set expenseDate(DateTime? value) {
+    _entity.expenseDate = value;
     notifyListeners();
   }
 
-  void save() {
-    print(_entity);
+  void save() async {
+    final saved = await ExpenseService().create(_entity);
+    print(saved);
   }
 }

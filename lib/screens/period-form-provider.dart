@@ -1,6 +1,6 @@
 import 'package:expensemanager/models/account/account.dart';
-import 'package:expensemanager/models/account/account.dart';
-import 'package:expensemanager/models/period.dart';
+import 'package:expensemanager/models/period/period-service.dart';
+import 'package:expensemanager/models/period/period.dart';
 import 'package:flutter/material.dart';
 
 class PeriodFormProvider extends ChangeNotifier {
@@ -13,17 +13,17 @@ class PeriodFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  DateTime? get initialDate => _entity.initialDate;
+  DateTime? get initialDate => _entity.initDate;
 
   set initialDate(DateTime? value) {
-    _entity.initialDate = value;
+    _entity.initDate = value;
     notifyListeners();
   }
 
-  DateTime? get finalDate => _entity.finalDate;
+  DateTime? get finalDate => _entity.finishDate;
 
   set finalDate(DateTime? value) {
-    _entity.finalDate = value;
+    _entity.finishDate = value;
     notifyListeners();
   }
 
@@ -34,7 +34,9 @@ class PeriodFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void save() {
-    print(_entity);
+  void save() async {
+    final service = PeriodService();
+    final created = await service.create(_entity);
+    print(created);
   }
 }
