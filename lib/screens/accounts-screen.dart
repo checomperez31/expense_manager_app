@@ -6,16 +6,14 @@ class AccountsScreen extends StatelessWidget {
   const AccountsScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-    create: (_) => AccountListProvider(),
-    child: Consumer<AccountListProvider>(
-      builder: (_, provider, __) => RefreshIndicator(
-        onRefresh: provider.refreshData,
-        child: ListView(
-          children: provider.elements.map((e) => ListTile(
-            title: Text(e.name ?? 'Sin nombre'),
-          )).toList(),
-        ),
+  Widget build(BuildContext context) => Consumer<AccountListProvider>(
+    builder: (_, provider, __) => RefreshIndicator(
+      onRefresh: provider.refreshData,
+      child: ListView(
+        children: provider.elements.map((e) => ListTile(
+          title: Text(e.name ?? 'Sin nombre'),
+          subtitle: Text(e.amount?.toString() ?? 'Cantidad no especificada'),
+        )).toList(),
       ),
     ),
   );

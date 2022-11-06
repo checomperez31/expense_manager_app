@@ -6,6 +6,10 @@ class AccountListProvider extends ChangeNotifier {
   final AccountService service = AccountService();
   List<Account> elements = [];
 
+  AccountListProvider() {
+    refreshData();
+  }
+
   Future refreshData() async {
     elements = await service.getList();
     notifyListeners();

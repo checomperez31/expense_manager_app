@@ -47,19 +47,16 @@ class PeriodFormScreen extends StatelessWidget {
                               onChange: (value) => provider.finalDate = value,
                             ),
                             const SizedBox(height: 15),
-                            SelectorInput<Account>(
-                              fetchData: AccountService().getList,
-                              decoration: InputDecorationUtils.getDefault(label: 'Cuenta'),
-                              initialValue: provider.account,
-                              onChange: (value) => provider.account = value,
-                            ),
-                            const SizedBox(height: 15),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SaveButton(
                                   text: 'Guardar',
-                                  onPressed: provider.save,
+                                  onPressed: () => provider.save().then((value) {
+                                    Navigator.of(context).pop();
+                                  }).catchError((err) {
+                                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ha ocurrido un error')));
+                                  }),
                                 )
                               ],
                             )

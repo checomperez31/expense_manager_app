@@ -6,16 +6,13 @@ class ExpensesScreen extends StatelessWidget {
   const ExpensesScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-    create: (_) => ExpenseListProvider(),
-    child: Consumer<ExpenseListProvider>(
-      builder: (_, provider, __) => RefreshIndicator(
-        onRefresh: provider.refreshData,
-        child: ListView(
-          children: provider.elements.map((e) => ListTile(
-            title: Text(e.description ?? 'Sin nombre'),
-          )).toList(),
-        ),
+  Widget build(BuildContext context) => Consumer<ExpenseListProvider>(
+    builder: (_, provider, __) => RefreshIndicator(
+      onRefresh: provider.refreshData,
+      child: ListView(
+        children: provider.elements.map((e) => ListTile(
+          title: Text(e.description ?? 'Sin nombre'),
+        )).toList(),
       ),
     ),
   );

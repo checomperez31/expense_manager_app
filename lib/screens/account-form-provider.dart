@@ -1,7 +1,9 @@
+import 'package:expensemanager/main.dart';
 import 'package:expensemanager/models/account-type-model/account-type-model.dart';
 import 'package:expensemanager/models/account/account-service.dart';
 import 'package:expensemanager/models/account/account.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AccountFormProvider extends ChangeNotifier {
   final Account _entity = Account();
@@ -21,6 +23,15 @@ class AccountFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String? get amount => _entity.amount?.toString() ?? '0.0';
+
+  set amount(String? value) {
+    try {
+      _entity.amount = double.tryParse(value ?? '0.0');
+    } catch (e) {}
+    notifyListeners();
+  }
+
   bool get loading => _loading;
 
   set loading(bool value) {
@@ -28,8 +39,12 @@ class AccountFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  save() async {
+  Future save() async {
     final service = AccountService();
-    final res = await service.create( _entity );
+    try {
+      await service.create( _entity );
+    } catch(e) {
+      Future.error('Ha ocurrido un error');
+    }
   }
 }

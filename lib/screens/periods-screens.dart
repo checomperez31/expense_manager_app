@@ -6,16 +6,13 @@ class PeriodsScreen extends StatelessWidget {
   const PeriodsScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-    create: (_) => PeriodListProvider(),
-    child: Consumer<PeriodListProvider>(
-      builder: (_, provider, __) => RefreshIndicator(
-        onRefresh: provider.refreshData,
-        child: ListView(
-          children: provider.elements.map((e) => ListTile(
-            title: Text(e.description ?? 'Sin nombre'),
-          )).toList(),
-        ),
+  Widget build(BuildContext context) => Consumer<PeriodListProvider>(
+    builder: (_, provider, __) => RefreshIndicator(
+      onRefresh: provider.refreshData,
+      child: ListView(
+        children: provider.elements.map((e) => ListTile(
+          title: Text(e.description ?? 'Sin nombre'),
+        )).toList(),
       ),
     ),
   );

@@ -12,14 +12,12 @@ class Period implements Catalog {
   String? description;
   DateTime? initDate;
   DateTime? finishDate;
-  Account? account;
 
   Period({
     this.id,
     this.description,
     this.initDate,
     this.finishDate,
-    this.account
   });
 
   Map<String, dynamic> toMap() => {
@@ -27,14 +25,13 @@ class Period implements Catalog {
     'description': description,
     'initDate': FormatUtils.dateToServerFormat(initDate),
     'finishDate': FormatUtils.dateToServerFormat(finishDate),
-    'account': account?.toMap(),
   };
 
   String toJson() => json.encode( toMap() );
 
   @override
   String toString() {
-    return 'Period{id: $id, description: $description, initialDate: $initDate, finalDate: $finishDate, account: $account}';
+    return 'Period{id: $id, description: $description, initialDate: $initDate, finalDate: $finishDate}';
   }
 
   @override
@@ -45,7 +42,6 @@ class Period implements Catalog {
     description: json['description'],
     initDate: json['initDate'] != null? FormatUtils.dateFromServer(json['initDate']): null,
     finishDate: json['finishDate'] != null? FormatUtils.dateFromServer(json['finishDate']): null,
-    account: json['account'] != null? Account.fromMap(json['account']): null,
   );
 
   factory Period.fromJson(String str) => Period.fromMap( json.decode(str) );

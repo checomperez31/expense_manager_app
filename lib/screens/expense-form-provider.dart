@@ -52,8 +52,12 @@ class ExpenseFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void save() async {
-    final saved = await ExpenseService().create(_entity);
-    print(saved);
+  Future save() async {
+    final service = ExpenseService();
+    try {
+      await service.create( _entity );
+    } catch(e) {
+      Future.error('Ha ocurrido un error');
+    }
   }
 }

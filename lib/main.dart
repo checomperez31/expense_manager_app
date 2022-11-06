@@ -1,17 +1,38 @@
 import 'package:expensemanager/app-routes.dart';
+import 'package:expensemanager/screens/account-list-provider.dart';
+import 'package:expensemanager/screens/expenses-list-provider.dart';
+import 'package:expensemanager/screens/period-list-provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const AppState());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class AppState extends StatelessWidget {
+  const AppState({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => ExpenseListProvider()),
+      ChangeNotifierProvider(create: (_) => AccountListProvider()),
+      ChangeNotifierProvider(create: (_) => PeriodListProvider()),
+    ],
+    child: const ExpenseManager(),
+  );
+}
+
+
+class ExpenseManager extends StatelessWidget {
+  static GlobalKey<NavigatorState> nav = GlobalKey();
+  const ExpenseManager({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: nav,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: buildMaterialColor(const Color(0xFF49a660))

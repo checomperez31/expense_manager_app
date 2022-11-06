@@ -6,6 +6,10 @@ class PeriodListProvider extends ChangeNotifier {
   final PeriodService _service = PeriodService();
   List<Period> elements = [];
 
+  PeriodListProvider() {
+    refreshData();
+  }
+
   Future refreshData() async {
     elements = await _service.getList();
     notifyListeners();

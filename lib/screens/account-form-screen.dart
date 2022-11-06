@@ -41,22 +41,24 @@ class AccountFormScreen extends StatelessWidget {
                             onChange: (value) => provider.type = value,
                           ),
                           const SizedBox(height: 15),
+                          TextFormField(
+                            initialValue: provider.amount,
+                            decoration: InputDecorationUtils.getDefault(label: 'Cantidad'),
+                            textInputAction: TextInputAction.next,
+                            keyboardType: TextInputType.number,
+                            onChanged: (value) => provider.amount = value,
+                          ),
+                          const SizedBox(height: 15),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              ElevatedButton(
-                                onPressed: () => provider.save(),
-                                style: ButtonStyle(
-                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(25),
-                                        )
-                                    ),
-                                    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                                        const EdgeInsets.symmetric(horizontal: 30)
-                                    )
-                                ),
-                                child: const Text('Guardar'),
+                              SaveButton(
+                                text: 'Guardar',
+                                onPressed: () => provider.save().then((value) {
+                                  Navigator.of(context).pop();
+                                }).catchError((err) {
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ha ocurrido un error')));
+                                }),
                               )
                             ],
                           )

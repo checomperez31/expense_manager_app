@@ -27,16 +27,12 @@ class PeriodFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Account? get account => _entity.account;
-
-  set account(Account? value) {
-    _entity.account = value;
-    notifyListeners();
-  }
-
-  void save() async {
+  Future save() async {
     final service = PeriodService();
-    final created = await service.create(_entity);
-    print(created);
+    try {
+      await service.create( _entity );
+    } catch(e) {
+      Future.error('Ha ocurrido un error');
+    }
   }
 }

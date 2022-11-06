@@ -8,13 +8,15 @@ class Account implements Catalog {
   String? id;
   String? name;
   AccountType? type;
+  double? amount;
 
-  Account({this.id, this.name, this.type});
+  Account({this.id, this.name, this.type, this.amount});
 
   Map<String, dynamic> toMap() => {
     'id': id,
     'name': name,
-    'type': type?.toMap()
+    'type': type?.toMap(),
+    'amount': amount,
   };
 
   String toJson() => json.encode( toMap() );
@@ -29,6 +31,7 @@ class Account implements Catalog {
     id: json['id'],
     name: json['name'],
     type: json['type'] != null? AccountType.fromMap( json['type'] ): null,
+    amount: json['amount'] != null? double.tryParse(json['amount'].toString()): 0,
   );
 
   factory Account.fromJson(String str) => Account.fromMap( json.decode( str ) );

@@ -76,7 +76,11 @@ class ExpenseFormScreen extends StatelessWidget {
                             children: [
                               SaveButton(
                                 text: 'Guardar',
-                                onPressed: provider.save,
+                                onPressed: () => provider.save().then((value) {
+                                  Navigator.of(context).pop();
+                                }).catchError((err) {
+                                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ha ocurrido un error')));
+                                }),
                               )
                             ],
                           )
