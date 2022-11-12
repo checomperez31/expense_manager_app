@@ -1,7 +1,7 @@
 export 'home-screen.dart';
-export 'accounts-screen.dart';
-export 'expenses-screen.dart';
-export 'periods-screens.dart';
-export 'account-form-screen.dart';
-export 'expense-form-screen.dart';
-export 'period-form-screen.dart';
+export 'account/account-form-screen.dart';
+export 'account/accounts-screen.dart';
+export 'expense/expense-form-screen.dart';
+export 'expense/expenses-screen.dart';
+export 'period/period-form-screen.dart';
+export 'period/periods-screens.dart';

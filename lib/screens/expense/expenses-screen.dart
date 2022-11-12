@@ -1,4 +1,5 @@
-import 'package:expensemanager/screens/expenses-list-provider.dart';
+import 'package:expensemanager/screens/expense/expense_tile.dart';
+import 'package:expensemanager/screens/expense/expenses-list-provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,10 +10,10 @@ class ExpensesScreen extends StatelessWidget {
   Widget build(BuildContext context) => Consumer<ExpenseListProvider>(
     builder: (_, provider, __) => RefreshIndicator(
       onRefresh: provider.refreshData,
-      child: ListView(
-        children: provider.elements.map((e) => ListTile(
-          title: Text(e.description ?? 'Sin nombre'),
-        )).toList(),
+      child: ListView.separated(
+        itemBuilder: (_, index) => ExpenseTile(entity: provider.elements[index]),
+        itemCount: provider.elements.length,
+        separatorBuilder: (_, index) => const Divider(height: 1),
       ),
     ),
   );

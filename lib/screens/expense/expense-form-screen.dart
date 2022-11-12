@@ -4,7 +4,7 @@ import 'package:expensemanager/models/expense-type/expense-type-service.dart';
 import 'package:expensemanager/models/expense-type/expense-type.dart';
 import 'package:expensemanager/models/period/period-service.dart';
 import 'package:expensemanager/models/period/period.dart';
-import 'package:expensemanager/screens/expense-form-provider.dart';
+import 'package:expensemanager/screens/expense/expense-form-provider.dart';
 import 'package:expensemanager/utils/input-decoration.dart';
 import 'package:expensemanager/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +31,7 @@ class ExpenseFormScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SelectorInput<Account>(
                             fetchData: AccountService().getList,
@@ -56,6 +57,53 @@ class ExpenseFormScreen extends StatelessWidget {
                             initialValue: provider.amount,
                             decoration: InputDecorationUtils.getDefault(label: 'Cantidad'),
                             onChanged: (value) => provider.amount = value,
+                            keyboardType: TextInputType.number,
+                          ),
+                          const SizedBox(height: 15),
+                          const Text('Tipo de movimiento'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Row(
+                                children: [
+                                  const Text('Gasto'),
+                                  Radio<String>(value: 'G', groupValue: provider.movementType, onChanged: (value) {
+                                    provider.movementType = value ?? 'G';
+                                  }),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text('Ingreso'),
+                                  Radio<String>(value: 'I', groupValue: provider.movementType, onChanged: (value) {
+                                    provider.movementType = value ?? 'I';
+                                  }),
+                                ],
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          const Text('Impactar en cuenta'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Row(
+                                children: [
+                                  const Text('Si'),
+                                  Radio<bool>(value: true, groupValue: provider.impact, onChanged: (value) {
+                                    provider.impact = value ?? true;
+                                  }),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text('No'),
+                                  Radio<bool>(value: false, groupValue: provider.impact, onChanged: (value) {
+                                    provider.impact = value ?? false;
+                                  }),
+                                ],
+                              )
+                            ],
                           ),
                           const SizedBox(height: 15),
                           SelectorInput<Period>(

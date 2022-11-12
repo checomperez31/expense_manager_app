@@ -33,8 +33,22 @@ class ExpenseFormProvider extends ChangeNotifier {
 
   set amount(String? value) {
     try {
-      _entity.amount = int.parse(value ?? '');
+      _entity.amount = double.parse(value ?? '');
     } catch (e) {}
+    notifyListeners();
+  }
+
+  String get movementType => _entity.movementType;
+
+  set movementType(String value) {
+    _entity.movementType = value;
+    notifyListeners();
+  }
+
+  bool get impact => _entity.impact;
+
+  set impact(bool value) {
+    _entity.impact = value;
     notifyListeners();
   }
 

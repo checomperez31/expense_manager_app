@@ -1,7 +1,7 @@
 import 'package:expensemanager/app-routes.dart';
-import 'package:expensemanager/screens/account-list-provider.dart';
-import 'package:expensemanager/screens/expenses-list-provider.dart';
-import 'package:expensemanager/screens/period-list-provider.dart';
+import 'package:expensemanager/screens/account/account-list-provider.dart';
+import 'package:expensemanager/screens/expense/expenses-list-provider.dart';
+import 'package:expensemanager/screens/period/period-list-provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

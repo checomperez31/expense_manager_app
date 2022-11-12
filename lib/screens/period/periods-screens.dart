@@ -1,4 +1,5 @@
-import 'package:expensemanager/screens/period-list-provider.dart';
+import 'package:expensemanager/screens/period/period-list-provider.dart';
+import 'package:expensemanager/screens/period/period_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,9 +11,7 @@ class PeriodsScreen extends StatelessWidget {
     builder: (_, provider, __) => RefreshIndicator(
       onRefresh: provider.refreshData,
       child: ListView(
-        children: provider.elements.map((e) => ListTile(
-          title: Text(e.description ?? 'Sin nombre'),
-        )).toList(),
+        children: provider.elements.map((e) => PeriodTile(entity: e)).toList(),
       ),
     ),
   );

@@ -1,5 +1,5 @@
 import 'package:expensemanager/models/account-type-model/account-type-model.dart';
-import 'package:expensemanager/screens/account-form-provider.dart';
+import 'package:expensemanager/screens/account/account-form-provider.dart';
 import 'package:expensemanager/utils/utils.dart';
 import 'package:expensemanager/widgets/widgets.dart';
 import 'package:flutter/material.dart';
