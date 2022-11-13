@@ -11,7 +11,7 @@ class PeriodsScreen extends StatelessWidget {
     builder: (_, provider, __) => RefreshIndicator(
       onRefresh: provider.refreshData,
       child: ListView(
-        children: provider.elements.map((e) => PeriodTile(entity: e)).toList(),
+        children: provider.elements.map((e) => PeriodTile(entity: e, onUpdate: provider.refreshData)).toList(),
       ),
     ),
   );

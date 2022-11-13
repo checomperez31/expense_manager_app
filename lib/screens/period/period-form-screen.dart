@@ -1,8 +1,6 @@
-import 'package:expensemanager/models/account/account-service.dart';
-import 'package:expensemanager/models/account/account.dart';
+import 'package:expensemanager/models/period/period.dart';
 import 'package:expensemanager/screens/period/period-form-provider.dart';
 import 'package:expensemanager/utils/input-decoration.dart';
-import 'package:expensemanager/widgets/selector-input.dart';
 import 'package:expensemanager/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,13 +10,14 @@ class PeriodFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final modalEntity = ModalRoute.of(context)?.settings.arguments as Period?;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nuevo periodo'),
       ),
       body: SingleChildScrollView(
         child: ChangeNotifierProvider(
-          create: (_) => PeriodFormProvider(),
+          create: (_) => PeriodFormProvider(modalEntity),
           child: Consumer<PeriodFormProvider>(
             builder: (_, provider, __) => Form(
               child: Row(

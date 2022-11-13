@@ -11,7 +11,7 @@ class AccountsScreen extends StatelessWidget {
     builder: (_, provider, __) => RefreshIndicator(
       onRefresh: provider.refreshData,
       child: ListView(
-        children: provider.elements.map((e) => AccountTile(entity: e)).toList(),
+        children: provider.elements.map((e) => AccountTile(entity: e, onUpdate: provider.refreshData)).toList(),
       ),
     ),
   );

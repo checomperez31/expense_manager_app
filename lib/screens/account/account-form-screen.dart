@@ -1,4 +1,5 @@
 import 'package:expensemanager/models/account-type-model/account-type-model.dart';
+import 'package:expensemanager/models/account/account.dart';
 import 'package:expensemanager/screens/account/account-form-provider.dart';
 import 'package:expensemanager/utils/utils.dart';
 import 'package:expensemanager/widgets/widgets.dart';
@@ -10,13 +11,14 @@ class AccountFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final modalEntity = ModalRoute.of(context)?.settings.arguments as Account?;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nueva cuenta'),
       ),
       body: SingleChildScrollView(
         child: ChangeNotifierProvider(
-          create: (_) => AccountFormProvider(),
+          create: (_) => AccountFormProvider(modalEntity),
           child: Consumer<AccountFormProvider>(
             builder: (_, provider, __) => Form(
               child: Row(

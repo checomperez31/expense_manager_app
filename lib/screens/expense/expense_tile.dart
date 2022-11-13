@@ -1,10 +1,12 @@
+import 'package:expensemanager/app-routes.dart';
 import 'package:expensemanager/models/expense/expense.dart';
 import 'package:expensemanager/utils/format-utils.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseTile extends StatelessWidget {
   final Expense entity;
-  const ExpenseTile({Key? key, required this.entity}) : super(key: key);
+  final VoidCallback? onUpdate;
+  const ExpenseTile({Key? key, required this.entity, this.onUpdate}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => ListTile(
@@ -16,6 +18,11 @@ class ExpenseTile extends StatelessWidget {
         _ammount()
       ],
     ),
+    onTap: () {
+      Navigator.of(context).pushNamed(AppRoutes.expenseForm, arguments: entity).then((value) {
+        if ( onUpdate != null ) onUpdate!();
+      });
+    },
   );
 
   Widget _ammount() {

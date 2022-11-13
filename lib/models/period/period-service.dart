@@ -10,6 +10,13 @@ class PeriodService with HttpUtils {
     return Period.fromJson( response.body );
   }
 
+  Future<Period> update(Period entity) async {
+    final response = await makePut(Constants.address, Constants.period, entity.toJson());
+    process( response );
+    print( response.body );
+    return Period.fromJson( response.body );
+  }
+
   Future<List<Period>> getList() async {
     final response = await get(Constants.address, Constants.period);
     process( response );

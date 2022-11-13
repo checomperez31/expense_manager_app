@@ -2,6 +2,7 @@ import 'package:expensemanager/models/account/account-service.dart';
 import 'package:expensemanager/models/account/account.dart';
 import 'package:expensemanager/models/expense-type/expense-type-service.dart';
 import 'package:expensemanager/models/expense-type/expense-type.dart';
+import 'package:expensemanager/models/expense/expense.dart';
 import 'package:expensemanager/models/period/period-service.dart';
 import 'package:expensemanager/models/period/period.dart';
 import 'package:expensemanager/screens/expense/expense-form-provider.dart';
@@ -15,13 +16,14 @@ class ExpenseFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final modalEntity = ModalRoute.of(context)?.settings.arguments as Expense?;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nuevo gasto'),
       ),
       body: SingleChildScrollView(
         child: ChangeNotifierProvider(
-          create: (_) => ExpenseFormProvider(),
+          create: (_) => ExpenseFormProvider(modalEntity),
           child: Consumer<ExpenseFormProvider>(
             builder: (_, provider, __) => Form(
               child: Row(

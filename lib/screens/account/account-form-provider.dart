@@ -1,4 +1,3 @@
-import 'package:expensemanager/main.dart';
 import 'package:expensemanager/models/account-type-model/account-type-model.dart';
 import 'package:expensemanager/models/account/account-service.dart';
 import 'package:expensemanager/models/account/account.dart';
@@ -6,7 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AccountFormProvider extends ChangeNotifier {
-  final Account _entity = Account();
+  final Account _entity;
+
+  AccountFormProvider(Account? entity): _entity = entity ?? Account();
+
   bool _loading = false;
 
   String? get name => _entity.name;
@@ -42,7 +44,11 @@ class AccountFormProvider extends ChangeNotifier {
   Future save() async {
     final service = AccountService();
     try {
-      await service.create( _entity );
+      if ( _entity.id == null ) {
+        await service.create( _entity );
+      } else {
+        await service.update( _entity );
+      }
     } catch(e) {
       Future.error('Ha ocurrido un error');
     }

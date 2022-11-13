@@ -11,7 +11,7 @@ class ExpensesScreen extends StatelessWidget {
     builder: (_, provider, __) => RefreshIndicator(
       onRefresh: provider.refreshData,
       child: ListView.separated(
-        itemBuilder: (_, index) => ExpenseTile(entity: provider.elements[index]),
+        itemBuilder: (_, index) => ExpenseTile(entity: provider.elements[index], onUpdate: provider.refreshData),
         itemCount: provider.elements.length,
         separatorBuilder: (_, index) => const Divider(height: 1),
       ),

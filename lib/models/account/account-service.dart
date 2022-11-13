@@ -9,6 +9,12 @@ class AccountService with HttpUtils {
     return Account.fromJson( response.body );
   }
 
+  Future<Account> update(Account entity) async {
+    final response = await makePut(Constants.address, Constants.account, entity.toJson());
+    process( response );
+    return Account.fromJson( response.body );
+  }
+
   Future<List<Account>> getList() async {
     final response = await get(Constants.address, Constants.account);
     process( response );

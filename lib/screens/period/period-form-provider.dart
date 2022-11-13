@@ -1,10 +1,11 @@
-import 'package:expensemanager/models/account/account.dart';
 import 'package:expensemanager/models/period/period-service.dart';
 import 'package:expensemanager/models/period/period.dart';
 import 'package:flutter/material.dart';
 
 class PeriodFormProvider extends ChangeNotifier {
-  Period _entity = Period();
+  final Period _entity;
+
+  PeriodFormProvider(Period? entity): _entity = entity ?? Period();
 
   String? get description => _entity.description;
 
@@ -30,7 +31,11 @@ class PeriodFormProvider extends ChangeNotifier {
   Future save() async {
     final service = PeriodService();
     try {
-      await service.create( _entity );
+      if ( _entity.id == null ) {
+        await service.create( _entity );
+      } else {
+        await service.update( _entity );
+      }
     } catch(e) {
       Future.error('Ha ocurrido un error');
     }

@@ -1,7 +1,11 @@
 import 'package:expensemanager/app-routes.dart';
+import 'package:expensemanager/screens/account/account-list-provider.dart';
+import 'package:expensemanager/screens/expense/expenses-list-provider.dart';
+import 'package:expensemanager/screens/period/period-list-provider.dart';
 import 'package:expensemanager/screens/screens.dart';
 import 'package:expensemanager/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   final PageController pageController = PageController();
@@ -24,13 +28,22 @@ class HomeScreen extends StatelessWidget {
         onPressed: () {
           switch(actualPage) {
             case 0:
-              Navigator.of(context).pushNamed(AppRoutes.expenseForm);
+              Navigator.of(context).pushNamed(AppRoutes.expenseForm).then((value) {
+                final provider = Provider.of<ExpenseListProvider>(context, listen: false);
+                provider.refreshData();
+              });
               break;
             case 1:
-              Navigator.of(context).pushNamed(AppRoutes.accountForm);
+              Navigator.of(context).pushNamed(AppRoutes.accountForm).then((value) {
+                final provider = Provider.of<AccountListProvider>(context, listen: false);
+                provider.refreshData();
+              });
               break;
             case 2:
-              Navigator.of(context).pushNamed(AppRoutes.periodForm);
+              Navigator.of(context).pushNamed(AppRoutes.periodForm).then((value) {
+                final provider = Provider.of<PeriodListProvider>(context, listen: false);
+                provider.refreshData();
+              });
               break;
           }
         },

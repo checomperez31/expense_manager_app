@@ -6,7 +6,9 @@ import 'package:expensemanager/models/period/period.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseFormProvider extends ChangeNotifier {
-  Expense _entity = Expense();
+  final Expense _entity;
+
+  ExpenseFormProvider(Expense? entity): _entity = entity ?? Expense();
 
   Account? get account => _entity.account;
 
@@ -69,7 +71,11 @@ class ExpenseFormProvider extends ChangeNotifier {
   Future save() async {
     final service = ExpenseService();
     try {
-      await service.create( _entity );
+      if ( _entity.id == null ) {
+        await service.create( _entity );
+      } else {
+        await service.update( _entity );
+      }
     } catch(e) {
       Future.error('Ha ocurrido un error');
     }
