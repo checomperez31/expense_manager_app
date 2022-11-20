@@ -18,7 +18,7 @@ class PeriodService with HttpUtils {
   }
 
   Future<List<Period>> getList() async {
-    final response = await get(Constants.address, Constants.period);
+    final response = await get(getUri(Constants.address, Constants.period));
     process( response );
     return Period.decodeListFromString( response.bodyBytes );
   }

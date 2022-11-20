@@ -16,12 +16,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 1,
+        title: const Text('Administracion'),
+      ),
       body: PageView(
         controller: pageController,
-        children: const [
+        children: [
           ExpensesScreen(),
-          AccountsScreen(),
-          PeriodsScreen()
+          const AccountsScreen(),
+          const PeriodsScreen()
         ],
       ),
       floatingActionButton: FloatingActionButton(

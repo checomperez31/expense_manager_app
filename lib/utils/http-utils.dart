@@ -17,17 +17,17 @@ mixin HttpUtils {
     });
   }
 
-  Future<http.Response> get(String address, String path) async {
-    final res = http.get(getUri(address, path));
+  Future<http.Response> get(Uri uri) async {
+    final res = http.get(uri);
     return res;
   }
 
-  Uri getUri(String address, String path) {
+  Uri getUri(String address, String path, {Map<String, dynamic>? params}) {
     if ( address.startsWith("https://") ) {
-      return Uri.https(address.substring(8), path);
+      return Uri.https(address.substring(8), path, params);
     } else {
       if ( address.startsWith("http://") ) {
-        return Uri.http(address.substring(7), path);
+        return Uri.http(address.substring(7), path, params);
       }
     }
     return Uri.http(address, path);

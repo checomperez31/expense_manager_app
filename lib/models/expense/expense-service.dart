@@ -17,8 +17,12 @@ class ExpenseService with HttpUtils {
     return Expense.fromJson( response.body );
   }
 
-  Future<List<Expense>> getList() async {
-    final response = await get(Constants.address, Constants.expense);
+  Future<List<Expense>> getList({int page = 0, String? account}) async {
+    final uri = getUri(Constants.address, Constants.expense, params: {
+      'page': page.toString(),
+      if ( account != null ) 'account.equal': account
+    });
+    final response = await get(uri);
     process( response );
     return Expense.decodeListFromString( response.bodyBytes );
   }

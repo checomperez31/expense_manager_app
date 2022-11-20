@@ -12,10 +12,26 @@ class ExpenseTile extends StatelessWidget {
   Widget build(BuildContext context) => ListTile(
     title: Text(entity.description ?? 'Sin descripcion'),
     subtitle: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        if ( entity.expenseDate != null ) Text(FormatUtils.formatDate(entity.expenseDate!, 'dd/MM/yyyy')),
-        _ammount()
+        Expanded(child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(entity.account?.description ?? 'Sin cuenta'),
+                Text(entity.type?.description ?? 'Sin tipo'),
+              ],
+            ),
+            const SizedBox(height: 3),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if ( entity.expenseDate != null ) Text(FormatUtils.formatDate(entity.expenseDate!, 'dd/MM/yyyy')),
+                _ammount()
+              ],
+            )
+          ],
+        ))
       ],
     ),
     onTap: () {

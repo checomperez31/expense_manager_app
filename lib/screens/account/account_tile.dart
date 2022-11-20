@@ -14,7 +14,7 @@ class AccountTile extends StatelessWidget {
       color: entity.amount != null? (entity.amount! < 0? Colors.red: Colors.green): null
     )),
     onTap: () {
-      Navigator.of(context).pushNamed(AppRoutes.accountForm, arguments: entity).then((value) {
+      Navigator.of(context).pushNamed(AppRoutes.accountDetails, arguments: entity).then((value) {
         if ( onUpdate != null ) onUpdate!();
       });
     },

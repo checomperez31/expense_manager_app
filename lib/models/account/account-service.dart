@@ -16,7 +16,7 @@ class AccountService with HttpUtils {
   }
 
   Future<List<Account>> getList() async {
-    final response = await get(Constants.address, Constants.account);
+    final response = await get(getUri(Constants.address, Constants.account));
     process( response );
     return Account.decodeListFromString( response.bodyBytes );
   }
