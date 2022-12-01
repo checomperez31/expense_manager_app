@@ -26,4 +26,14 @@ class ExpenseService with HttpUtils {
     process( response );
     return Expense.decodeListFromString( response.bodyBytes );
   }
+
+  Future<ExpenseStats> getStats({String? account, String? period}) async {
+    final uri = getUri(Constants.address, '${Constants.expense}/stats', params: {
+      if ( account != null ) 'account.equal': account,
+      if ( period != null ) 'period.equal': period,
+    });
+    final response = await get(uri);
+    process( response );
+    return ExpenseStats.fromJson( response.bodyBytes );
+  }
 }

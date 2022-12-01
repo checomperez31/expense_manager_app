@@ -19,7 +19,7 @@ class PeriodTile extends StatelessWidget {
       ],
     ),
     onTap: () {
-      Navigator.of(context).pushNamed(AppRoutes.periodForm, arguments: entity).then((value) {
+      Navigator.of(context).pushNamed(AppRoutes.periodDetails, arguments: entity).then((value) {
         if ( onUpdate != null ) onUpdate!();
       });
     },

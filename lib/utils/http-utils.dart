@@ -18,6 +18,7 @@ mixin HttpUtils {
   }
 
   Future<http.Response> get(Uri uri) async {
+    print('Making get to $uri');
     final res = http.get(uri);
     return res;
   }

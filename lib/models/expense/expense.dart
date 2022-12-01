@@ -74,3 +74,17 @@ class Expense {
     return (json.decode( str ) as List).map((e) => Expense.fromMap( e )).toList();
   }
 }
+
+class ExpenseStats {
+  double? expense;
+  double? ingress;
+
+  ExpenseStats({this.expense, this.ingress});
+
+  factory ExpenseStats.fromMap(Map<String, dynamic> json) => ExpenseStats(
+    expense: json['expense'] != null? double.tryParse(json['expense'].toString()): null,
+    ingress: json['ingress'] != null? double.tryParse(json['ingress'].toString()): null,
+  );
+
+  factory ExpenseStats.fromJson(List<int> data) => ExpenseStats.fromMap( json.decode( utf8.decode( data ) ) );
+}
