@@ -62,29 +62,6 @@ class ExpenseFormScreen extends StatelessWidget {
                             keyboardType: TextInputType.number,
                           ),
                           const SizedBox(height: 15),
-                          const Text('Tipo de movimiento'),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Row(
-                                children: [
-                                  const Text('Gasto'),
-                                  Radio<String>(value: 'G', groupValue: provider.movementType, onChanged: (value) {
-                                    provider.movementType = value ?? 'G';
-                                  }),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  const Text('Ingreso'),
-                                  Radio<String>(value: 'I', groupValue: provider.movementType, onChanged: (value) {
-                                    provider.movementType = value ?? 'I';
-                                  }),
-                                ],
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 15),
                           const Text('Impactar en cuenta'),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -108,6 +85,44 @@ class ExpenseFormScreen extends StatelessWidget {
                             ],
                           ),
                           const SizedBox(height: 15),
+                          const Text('Tipo de movimiento'),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Row(
+                                children: [
+                                  const Text('Gasto'),
+                                  Radio<String>(value: 'G', groupValue: provider.movementType, onChanged: (value) {
+                                    provider.movementType = value ?? 'G';
+                                  }),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text('Ingreso'),
+                                  Radio<String>(value: 'I', groupValue: provider.movementType, onChanged: (value) {
+                                    provider.movementType = value ?? 'I';
+                                  }),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text('Transferencia'),
+                                  Radio<String>(value: 'T', groupValue: provider.movementType, onChanged: (value) {
+                                    provider.movementType = value ?? 'T';
+                                  }),
+                                ],
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 15),
+                          SelectorInput<Account>(
+                            fetchData: AccountService().getList,
+                            decoration: InputDecorationUtils.getDefault(label: 'Cuenta a transferir'),
+                            initialValue: provider.accountToTransfer,
+                            onChange: (value) => provider.accountToTransfer = value,
+                          ),
+                          const SizedBox(height: 15),
                           SelectorInput<Period>(
                             fetchData: PeriodService().getList,
                             decoration: InputDecorationUtils.getDefault(label: 'Periodo'),
@@ -126,7 +141,7 @@ class ExpenseFormScreen extends StatelessWidget {
                             children: [
                               SaveButton(
                                 text: 'Guardar',
-                                onPressed: () => provider.save().then((value) {
+                                onPressed: provider.saving ? null: () => provider.save().then((value) {
                                   Navigator.of(context).pop();
                                 }).catchError((err) {
                                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Ha ocurrido un error')));

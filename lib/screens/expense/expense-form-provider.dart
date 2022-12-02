@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class ExpenseFormProvider extends ChangeNotifier {
   final Expense _entity;
+  bool _saving = false;
 
   ExpenseFormProvider(Expense? entity): _entity = entity ?? Expense();
 
@@ -68,7 +69,22 @@ class ExpenseFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Account? get accountToTransfer => _entity.accountToTransfer;
+
+  set accountToTransfer(Account? value) {
+    _entity.accountToTransfer = value;
+    notifyListeners();
+  }
+
+  bool get saving => _saving;
+
+  set saving(bool value) {
+    _saving = value;
+    notifyListeners();
+  }
+
   Future save() async {
+    saving = true;
     final service = ExpenseService();
     try {
       if ( _entity.id == null ) {
@@ -76,8 +92,10 @@ class ExpenseFormProvider extends ChangeNotifier {
       } else {
         await service.update( _entity );
       }
+      saving = false;
     } catch(e) {
-      Future.error('Ha ocurrido un error');
+      saving = false;
+      return Future.error('Ha ocurrido un error');
     }
   }
 }

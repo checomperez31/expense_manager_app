@@ -17,6 +17,8 @@ class Expense {
   bool impact;
   Period? period;
   DateTime? expenseDate;
+  Expense? origin;
+  Account? accountToTransfer;
 
   Expense({
     this.id,
@@ -29,6 +31,8 @@ class Expense {
     this.expenseDate,
     this.movementType = 'G',
     this.impact = true,
+    this.origin,
+    this.accountToTransfer,
   });
 
   Map<String, dynamic> toMap() => {
@@ -42,6 +46,7 @@ class Expense {
     'expenseDate': FormatUtils.dateToServerFormat(expenseDate),
     'movementType': movementType,
     'impact': impact,
+    'accountToTransfer': accountToTransfer?.toMap(),
   };
 
   String toJson() => json.encode( toMap() );
@@ -62,6 +67,7 @@ class Expense {
     expenseDate: json['expenseDate'] != null? FormatUtils.dateFromServer(json['expenseDate']): null,
     movementType: json['movementType'] ?? 'G',
     impact: json['impact'] ?? true,
+    origin: json['origin'] != null? Expense.fromMap(json['origin']): null,
   );
 
   factory Expense.fromJson(String str) => Expense.fromMap( json.decode(str) );
