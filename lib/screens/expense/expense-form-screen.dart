@@ -115,8 +115,8 @@ class ExpenseFormScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          const SizedBox(height: 15),
-                          SelectorInput<Account>(
+                          if ( provider.movementType == 'T' ) const SizedBox(height: 15),
+                          if ( provider.movementType == 'T' ) SelectorInput<Account>(
                             fetchData: AccountService().getList,
                             decoration: InputDecorationUtils.getDefault(label: 'Cuenta a transferir'),
                             initialValue: provider.accountToTransfer,

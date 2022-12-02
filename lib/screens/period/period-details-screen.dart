@@ -22,7 +22,7 @@ class PeriodDetailsScreen extends StatelessWidget {
               title: Text(modalEntity?.description ?? 'Detalles del periodo'),
               actions: [
                 IconButton(onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.accountForm, arguments: modalEntity);
+                  Navigator.of(context).pushNamed(AppRoutes.periodForm, arguments: modalEntity);
                 }, icon: const Icon(Icons.edit))
               ],
             ),

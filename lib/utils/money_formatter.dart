@@ -12,7 +12,7 @@ class MoneyFormatter {
         Text('\$', style: style),
         Text(amountFragments[0], style: style),
         Text('.', style: style),
-        Text(amountFragments[1].padRight(2, '0'), style: style),
+        Text(amountFragments[1].padRight(2, '0').substring(0, 2), style: style),
       ],
     );
   }
