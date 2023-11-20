@@ -50,7 +50,8 @@ class _DateInputState extends State<DateInput> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: widget.firstDate ?? now.subtract(const Duration(days: 18250)),
-      lastDate: widget.lastDate ?? now.add(const Duration(days: 365))
+      lastDate: widget.lastDate ?? now.add(const Duration(days: 365)),
+      locale: const Locale('es', 'ES')
     ).then((value) {
       if ( value != null ) {
         setValue( value );

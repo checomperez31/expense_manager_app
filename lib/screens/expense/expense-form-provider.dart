@@ -11,6 +11,8 @@ class ExpenseFormProvider extends ChangeNotifier {
 
   ExpenseFormProvider(Expense? entity): _entity = entity ?? Expense();
 
+  String? get id => _entity.id;
+
   Account? get account => _entity.account;
 
   set account(Account? value) {
@@ -68,6 +70,8 @@ class ExpenseFormProvider extends ChangeNotifier {
     _entity.expenseDate = value;
     notifyListeners();
   }
+
+  Expense? get origin => _entity.origin;
 
   Account? get accountToTransfer => _entity.accountToTransfer;
 

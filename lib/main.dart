@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:expensemanager/app-routes.dart';
 import 'package:expensemanager/screens/account/account-list-provider.dart';
 import 'package:expensemanager/screens/expense/expenses-list-provider.dart';
 import 'package:expensemanager/screens/period/period-list-provider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const AppState());
@@ -38,7 +39,11 @@ class ExpenseManager extends StatelessWidget {
         primarySwatch: buildMaterialColor(const Color(0xFF49a660))
       ),
       routes: AppRoutes.routes,
-      initialRoute: AppRoutes.defaultRoute
+      initialRoute: AppRoutes.defaultRoute,
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+      supportedLocales: const [
+        Locale('es', '')
+      ],
     );
   }
 

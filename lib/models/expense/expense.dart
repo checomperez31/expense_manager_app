@@ -35,7 +35,7 @@ class Expense {
     this.accountToTransfer,
   });
 
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toCreateMap() => {
     'id': id,
     'account': account?.toMap(),
     'description': description,
@@ -48,6 +48,22 @@ class Expense {
     'impact': impact,
     'accountToTransfer': accountToTransfer?.toMap(),
   };
+
+  Map<String, dynamic> toMap() => {
+    'id': id,
+    'account': account?.toMap(),
+    'description': description,
+    'type': type?.toMap(),
+    'parent': parent?.toMap(),
+    'amount': amount,
+    'period': period?.toMap(),
+    'expenseDate': FormatUtils.dateToServerFormat(expenseDate),
+    'movementType': movementType,
+    'impact': impact,
+    'origin': origin?.toMap(),
+  };
+
+  String toCreateJson() => json.encode( toCreateMap() );
 
   String toJson() => json.encode( toMap() );
 

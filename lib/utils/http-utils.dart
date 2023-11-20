@@ -35,7 +35,10 @@ mixin HttpUtils {
   }
 
   http.Response process(http.Response response) {
-    if ( response.statusCode != 200 ) throw 'Error in request, code: ${response.statusCode}';
+    if ( response.statusCode != 200 ) {
+      print('Error ${response.statusCode}: ${response.body}');
+      throw 'Error in request, code: ${response.statusCode}';
+    }
     return response;
   }
 }

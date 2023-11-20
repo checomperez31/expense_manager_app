@@ -115,12 +115,23 @@ class ExpenseFormScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          if ( provider.movementType == 'T' ) const SizedBox(height: 15),
-                          if ( provider.movementType == 'T' ) SelectorInput<Account>(
+                          if ((provider.id == null && provider.movementType == 'T') || provider.origin != null) const SizedBox(height: 15),
+                          if ( provider.id == null && provider.movementType == 'T' ) SelectorInput<Account>(
                             fetchData: AccountService().getList,
                             decoration: InputDecorationUtils.getDefault(label: 'Cuenta a transferir'),
                             initialValue: provider.accountToTransfer,
                             onChange: (value) => provider.accountToTransfer = value,
+                          ),
+                          if ( provider.origin != null ) Card(
+                            child: Row(
+                              children: [
+                                Column(
+                                  children: [
+                                    Text('Si hay')
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                           const SizedBox(height: 15),
                           SelectorInput<Period>(
