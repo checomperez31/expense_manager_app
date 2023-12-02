@@ -48,6 +48,13 @@ class _BottomBarOptionsState extends State<BottomBarOptions> {
             title: 'Periodos',
             selected: localIndex,
           ),
+          BottomBarButton(
+            onPressed: _selectOption,
+            index: 3,
+            icon: Icons.area_chart,
+            title: 'Estadísticas',
+            selected: localIndex,
+          ),
         ],
       ),
     );

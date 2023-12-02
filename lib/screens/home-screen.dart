@@ -1,6 +1,7 @@
 import 'package:expensemanager/app-routes.dart';
 import 'package:expensemanager/screens/account/account-list-provider.dart';
 import 'package:expensemanager/screens/expense/expenses-list-provider.dart';
+import 'package:expensemanager/screens/graphics/graphics-screen.dart';
 import 'package:expensemanager/screens/period/period-list-provider.dart';
 import 'package:expensemanager/screens/screens.dart';
 import 'package:expensemanager/widgets/widgets.dart';
@@ -25,7 +26,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           ExpensesScreen(),
           const AccountsScreen(),
-          const PeriodsScreen()
+          const PeriodsScreen(),
+          const GraphicsScreen()
         ],
       ),
       floatingActionButton: FloatingActionButton(
