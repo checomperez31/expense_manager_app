@@ -7,4 +7,5 @@ class Constants {
   static const String account = '/api/account';
   static const String period = '/api/period';
   static const String expense = '/api/expense';
+  static const String statsByType = '/api/stats/global-types';
 }

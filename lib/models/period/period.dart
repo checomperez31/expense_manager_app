@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:expensemanager/models/account/account.dart';
 import 'package:expensemanager/models/catalog.dart';
 import 'package:expensemanager/utils/utils.dart';
 
