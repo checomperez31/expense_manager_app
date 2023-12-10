@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:graphic/graphic.dart';
 import 'package:expensemanager/models/stats/stats-by-type.dart';
 import 'package:expensemanager/screens/graphics/global-chart-by-type-provider.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:graphic/graphic.dart';
-import 'package:provider/provider.dart';
 
 class GlobalChartByType extends StatelessWidget {
   const GlobalChartByType({Key? key}) : super(key: key);
@@ -12,7 +11,7 @@ class GlobalChartByType extends StatelessWidget {
   Widget build(BuildContext context) => Consumer<GlobalChartByTypeProvider>(
     builder: (_, provider, __) => Card(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
         child: Row(
           children: [
             Expanded(
@@ -65,19 +64,4 @@ class GlobalChartByType extends StatelessWidget {
       ),
     )
   );
-
-
-  Widget build2(BuildContext context) {
-    return ListView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-
-            ],
-          ),
-        ]
-    );
-  }
 }

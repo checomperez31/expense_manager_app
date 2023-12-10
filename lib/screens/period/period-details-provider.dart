@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 class PeriodDetailsProvider extends ChangeNotifier {
   final Period period;
   ExpenseStats? stats;
+  double diff = 0;
   bool _loading = false;
 
   PeriodDetailsProvider(this.period) {
@@ -15,6 +16,8 @@ class PeriodDetailsProvider extends ChangeNotifier {
   getStats() async {
     loading = true;
     stats = await ExpenseService().getStats(period: period.id);
+    if ( stats != null && stats!.expense != null && stats!.ingress != null ) diff = stats!.ingress! - stats!.expense!;
+    print( diff );
     loading = false;
   }
 
