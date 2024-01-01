@@ -46,6 +46,7 @@ class ExpenseFormScreen extends StatelessWidget {
                             initialValue: provider.description,
                             decoration: InputDecorationUtils.getDefault(label: 'Descripcion'),
                             onChanged: (value) => provider.description = value,
+                            textCapitalization: TextCapitalization.sentences,
                           ),
                           const SizedBox(height: 15),
                           SelectorInput<ExpenseType>(
