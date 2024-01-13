@@ -40,6 +40,7 @@ dependencies:
   intl: ^0.17.0
   provider: ^6.0.4
   graphic: 2.2.1
+  font_awesome_flutter: 10.4.0
 
 dev_dependencies:
   flutter_test:
