@@ -71,8 +71,6 @@ class ExpenseFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Expense? get origin => _entity.origin;
-
   Account? get accountToTransfer => _entity.accountToTransfer;
 
   set accountToTransfer(Account? value) {
