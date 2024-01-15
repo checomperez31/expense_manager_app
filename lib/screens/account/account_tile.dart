@@ -1,4 +1,5 @@
 import 'package:expensemanager/app-routes.dart';
+import 'package:expensemanager/constants.dart';
 import 'package:expensemanager/models/account/account.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class AccountTile extends StatelessWidget {
   Widget build(BuildContext context) => ListTile(
     title: Text(entity.name ?? 'Sin nombre'),
     subtitle: Text(entity.amount?.toString() ?? 'Sin fondos', style: TextStyle(
-      color: entity.amount != null? (entity.amount! < 0? Colors.red: Colors.green): null
+      color: entity.amount != null? (entity.amount! < 0? Constants.red: Constants.green): null
     )),
     onTap: () {
       Navigator.of(context).pushNamed(AppRoutes.accountDetails, arguments: entity).then((value) {

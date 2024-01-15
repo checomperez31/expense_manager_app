@@ -1,4 +1,5 @@
 import 'package:expensemanager/app-routes.dart';
+import 'package:expensemanager/constants.dart';
 import 'package:expensemanager/models/expense/expense.dart';
 import 'package:expensemanager/utils/format-utils.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class ExpenseTile extends StatelessWidget {
   );
 
   Widget _ammount() {
-    final color = entity.movementType == 'T' ? (Colors.blue) : (entity.amount != null? (entity.amount! < 0? Colors.red: Colors.green): null);
+    final color = entity.movementType == 'T' ? (Constants.blue) : (entity.amount != null? (entity.amount! < 0? Constants.red: Constants.green): null);
     final style = TextStyle(color: color);
     final amountFragments = (entity.amount?.toString() ?? '0.0').split('.');
     return Row(
