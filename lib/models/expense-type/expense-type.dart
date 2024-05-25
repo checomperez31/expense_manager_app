@@ -8,12 +8,16 @@ class ExpenseType implements Catalog {
 
   @override
   String? description;
+  String? icon;
+  String? color;
 
-  ExpenseType({required this.id, required this.description});
+  ExpenseType({required this.id, required this.description, this.icon, this.color});
 
   Map<String, dynamic> toMap() => {
     'id': id,
     'description': description,
+    'icon': icon,
+    'color': color,
   };
 
   @override
@@ -22,6 +26,8 @@ class ExpenseType implements Catalog {
   factory ExpenseType.fromMap(Map<String, dynamic> json) => ExpenseType(
     id: json['id'],
     description: json['description'],
+    icon: json['icon'],
+    color: json['color'],
   );
 
   factory ExpenseType.fromJson(String str) => ExpenseType.fromMap( json.decode( str ) );

@@ -18,7 +18,7 @@ class ChartTypePeriod extends StatelessWidget {
                 const Text('Gastos por tipo'),
                 SizedBox(
                   width: double.infinity,
-                  height: 400,
+                  height: 370,
                   child: provider.elementsByType.isNotEmpty ? Chart<StatsByPeriod>(
                     data: provider.elementsByType,
                     variables: {
@@ -45,7 +45,7 @@ class ChartTypePeriod extends StatelessWidget {
                             )
                         ),
                         color: ColorEncode(
-                            variable: 'tipo', values: Defaults.colors20
+                            variable: 'tipo', values: provider.elementsByType.map((e) => fromHex(e.color ?? '#00ffff', 'ff')).toList()
                         ),
                         modifiers: [StackModifier()],
                       )
@@ -59,4 +59,11 @@ class ChartTypePeriod extends StatelessWidget {
       ],
     ),
   );
+
+  static Color fromHex(String hexString, String alpha) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write(alpha);
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
 }

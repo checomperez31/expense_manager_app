@@ -7,6 +7,7 @@ import 'package:expensemanager/models/period/period-service.dart';
 import 'package:expensemanager/models/period/period.dart';
 import 'package:expensemanager/screens/expense/expense-form-provider.dart';
 import 'package:expensemanager/utils/input-decoration.dart';
+import 'package:expensemanager/utils/radio-button.dart';
 import 'package:expensemanager/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,12 @@ class ExpenseFormScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          RadioButton(
+                            options: [
+                              RadioButtonOption(id: 'G', description: 'Gasto'),
+                              RadioButtonOption(id: 'I', description: 'Ingreso'),
+                            ],
+                          ),
                           SelectorInput<Account>(
                             fetchData: AccountService().getList,
                             decoration: InputDecorationUtils.getDefault(label: 'Cuenta'),

@@ -1,6 +1,7 @@
 import 'package:expensemanager/app-routes.dart';
 import 'package:expensemanager/constants.dart';
 import 'package:expensemanager/models/expense/expense.dart';
+import 'package:expensemanager/utils/font-awesome-icons-mapper.dart';
 import 'package:expensemanager/utils/format-utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,6 +13,8 @@ class ExpenseTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListTile(
+    leading: _icon(entity),
+    minLeadingWidth: 30,
     title: Text(entity.description ?? 'Sin descripcion'),
     subtitle: Row(
       children: [
@@ -59,5 +62,28 @@ class ExpenseTile extends StatelessWidget {
         Text(amountFragments[1].padRight(2, '0'), style: style),
       ],
     );
+  }
+
+
+  Widget? _icon(Expense entity) {
+    if ( entity.type == null || entity.type?.icon == null ) return null;
+    return Container(
+      width: 32,
+      height: 32,
+      decoration: BoxDecoration(
+        color: fromHex(entity.type!.color!, '30'),
+        borderRadius: const BorderRadius.all(Radius.circular(10))
+      ),
+      child: Center(
+        child: FaIcon(FontAwesomeIconsMapper.getIcon( entity.type!.icon! ), color: fromHex(entity.type!.color!, 'ff'), size: 15),
+      )
+    );
+  }
+
+  static Color fromHex(String hexString, String alpha) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write(alpha);
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
   }
 }

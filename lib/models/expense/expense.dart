@@ -44,7 +44,7 @@ class Expense {
     'expenseDate': FormatUtils.dateToServerFormat(expenseDate),
     'movementType': movementType,
     'impact': impact,
-    'accountToTransfer': accountToTransfer?.toMap(),
+    'accountDestination': accountToTransfer?.toMap(),
   };
 
   Map<String, dynamic> toMap() => {
@@ -58,7 +58,7 @@ class Expense {
     'expenseDate': FormatUtils.dateToServerFormat(expenseDate),
     'movementType': movementType,
     'impact': impact,
-    'accountToTransfer': accountToTransfer?.toMap(),
+    'accountDestination': accountToTransfer?.toMap(),
   };
 
   String toCreateJson() => json.encode( toCreateMap() );

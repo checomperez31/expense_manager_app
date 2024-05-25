@@ -6,14 +6,18 @@ class StatsByPeriod {
   String? period;
   String? expense;
   double? amount;
+  String? icon;
+  String? color;
 
-  StatsByPeriod({this.account, this.period, this.expense, this.amount});
+  StatsByPeriod({this.account, this.period, this.expense, this.amount, this.icon, this.color});
 
   factory StatsByPeriod.fromMap(Map<String, dynamic> json) => StatsByPeriod(
     account: json['account'],
     period: json['period'],
     expense: json['expense'],
     amount: json['amount'],
+    icon: json['icon'],
+    color: json['color'],
   );
 
   factory StatsByPeriod.fromJson(String str) => StatsByPeriod.fromMap( json.decode(str) );
