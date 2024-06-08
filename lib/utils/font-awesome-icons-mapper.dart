@@ -20,10 +20,15 @@ class FontAwesomeIconsMapper {
     'coins': FontAwesomeIcons.coins,
     'car-side': FontAwesomeIcons.carSide,
     'hospital': FontAwesomeIcons.hospital,
+    'computer': FontAwesomeIcons.computer,
+    'heart': FontAwesomeIcons.heart,
   };
 
   static getIcon(String icon) {
-    if ( !mapping.containsKey( icon ) ) return FontAwesomeIcons.question;
+    if ( !mapping.containsKey( icon ) ) {
+      print(icon);
+      return FontAwesomeIcons.question;
+    };
     return mapping[icon];
   }
 }

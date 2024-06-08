@@ -7,14 +7,18 @@ class SelectorInput<X extends Catalog> extends StatefulWidget {
   final InputDecoration decoration;
   final Future<List<X>> Function() fetchData;
   final void Function(X)? onChange;
+  final ListTile Function(X, GestureTapCallback?)? customTile;
   final X? initialValue;
+  final List<X>? omittedValues;
 
   const SelectorInput({
     Key? key,
     this.decoration = const InputDecoration(),
     required this.fetchData,
     this.onChange,
-    this.initialValue
+    this.initialValue,
+    this.omittedValues,
+    this.customTile
   }) : super(key: key);
 
   @override
@@ -29,6 +33,17 @@ class _SelectorInputState<X extends Catalog> extends State<SelectorInput<X>> {
     super.initState();
     if ( widget.initialValue != null ) {
       controller.text = widget.initialValue!.description;
+    } else {
+      controller.text = '';
+    }
+  }
+
+
+  @override
+  void didUpdateWidget(SelectorInput<X> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if ( widget.initialValue == null ) {
+      controller.text = '';
     }
   }
 
@@ -45,7 +60,12 @@ class _SelectorInputState<X extends Catalog> extends State<SelectorInput<X>> {
   showSelectDialog(BuildContext context) async{
     Navigator.of(context).push(MaterialPageRoute(
         fullscreenDialog: true,
-        builder: (_) => SelectDialog<X>(fetchData: widget.fetchData, title: widget.decoration.hintText ?? widget.decoration.labelText ?? 'Seleccione una opcion')
+        builder: (_) => SelectDialog<X>(
+          fetchData: widget.fetchData,
+          title: widget.decoration.hintText ?? widget.decoration.labelText ?? 'Seleccione una opcion',
+          omittedValues: widget.omittedValues,
+          customTile: widget.customTile,
+        )
     )).then((value) {
       if ( value != null ) {
         controller.text = value.description;

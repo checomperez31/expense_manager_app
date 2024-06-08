@@ -12,7 +12,7 @@ class ChartTypePeriodProvider extends ChangeNotifier {
   }
 
   Future refreshData() async {
-    elementsByType = await _service.getPeriodList( period );
+    elementsByType = await _service.getPeriodStats( period );
     notifyListeners();
   }
 }

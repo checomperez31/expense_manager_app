@@ -6,10 +6,13 @@ import 'package:expensemanager/models/expense/expense.dart';
 import 'package:expensemanager/models/period/period-service.dart';
 import 'package:expensemanager/models/period/period.dart';
 import 'package:expensemanager/screens/expense/expense-form-provider.dart';
+import 'package:expensemanager/utils/color-utils.dart';
+import 'package:expensemanager/utils/font-awesome-icons-mapper.dart';
 import 'package:expensemanager/utils/input-decoration.dart';
-import 'package:expensemanager/utils/radio-button.dart';
+import 'package:expensemanager/widgets/radio-button.dart';
 import 'package:expensemanager/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class ExpenseFormScreen extends StatelessWidget {
@@ -36,17 +39,31 @@ class ExpenseFormScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          const Text('Tipo de movimiento'),
+                          const SizedBox(height: 1),
                           RadioButton(
+                            onSelect: (option) => provider.movementType = option.id.toString(),
                             options: [
                               RadioButtonOption(id: 'G', description: 'Gasto'),
                               RadioButtonOption(id: 'I', description: 'Ingreso'),
+                              RadioButtonOption(id: 'T', description: 'Transferencia'),
                             ],
+                            initialValue: RadioButtonOption(id: provider.movementType),
                           ),
+                          const SizedBox(height: 15),
                           SelectorInput<Account>(
                             fetchData: AccountService().getList,
                             decoration: InputDecorationUtils.getDefault(label: 'Cuenta'),
                             initialValue: provider.account,
                             onChange: (value) => provider.account = value,
+                          ),
+                          if (provider.movementType == 'T') const SizedBox(height: 15),
+                          if ( provider.movementType == 'T' ) SelectorInput<Account>(
+                            fetchData: AccountService().getList,
+                            decoration: InputDecorationUtils.getDefault(label: 'Cuenta a transferir'),
+                            initialValue: provider.accountToTransfer,
+                            onChange: (value) => provider.accountToTransfer = value,
+                            omittedValues: provider.account != null ? [ provider.account! ]: null,
                           ),
                           const SizedBox(height: 15),
                           TextFormField(
@@ -61,6 +78,12 @@ class ExpenseFormScreen extends StatelessWidget {
                             decoration: InputDecorationUtils.getDefault(label: 'Tipo'),
                             initialValue: provider.type,
                             onChange: (value) => provider.type = value,
+                            customTile: (val, tap) => ListTile(
+                              leading: _icon( val ),
+                              minLeadingWidth: 30,
+                              title: Text(val.description ?? 'SIN DESCRIPCION'),
+                              onTap: tap,
+                            ),
                           ),
                           const SizedBox(height: 15),
                           TextFormField(
@@ -123,13 +146,6 @@ class ExpenseFormScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          if (provider.movementType == 'T') const SizedBox(height: 15),
-                          if ( provider.movementType == 'T' ) SelectorInput<Account>(
-                            fetchData: AccountService().getList,
-                            decoration: InputDecorationUtils.getDefault(label: 'Cuenta a transferir'),
-                            initialValue: provider.accountToTransfer,
-                            onChange: (value) => provider.accountToTransfer = value,
-                          ),
                           const SizedBox(height: 15),
                           SelectorInput<Period>(
                             fetchData: PeriodService().getList,
@@ -167,6 +183,21 @@ class ExpenseFormScreen extends StatelessWidget {
           ),
         )
       ),
+    );
+  }
+
+  Widget? _icon(ExpenseType entity) {
+    if ( entity.icon == null ) return null;
+    return Container(
+        width: 32,
+        height: 32,
+        decoration: BoxDecoration(
+            color: ColorUtils.fromHex(entity.color!, '30'),
+            borderRadius: const BorderRadius.all(Radius.circular(10))
+        ),
+        child: Center(
+          child: FaIcon(FontAwesomeIconsMapper.getIcon( entity.icon! ), color: ColorUtils.fromHex(entity.color!, 'ff'), size: 15),
+        )
     );
   }
 }

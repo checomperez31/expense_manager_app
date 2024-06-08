@@ -13,4 +13,9 @@ class StatsByTypeService with HttpUtils {
     final res = await get(getUri(Constants.address, '${Constants.statsByType}/$period'));
     return StatsByPeriod.decodeListFromString( res.bodyBytes );
   }
+
+  Future<List<StatsByPeriod>> getPeriodStats(String period) async {
+    final res = await get(getUri(Constants.address, '${Constants.statsTypeByPeriod}/$period'));
+    return StatsByPeriod.decodeListFromString( res.bodyBytes );
+  }
 }

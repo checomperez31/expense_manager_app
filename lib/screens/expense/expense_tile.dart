@@ -1,6 +1,7 @@
 import 'package:expensemanager/app-routes.dart';
 import 'package:expensemanager/constants.dart';
 import 'package:expensemanager/models/expense/expense.dart';
+import 'package:expensemanager/utils/color-utils.dart';
 import 'package:expensemanager/utils/font-awesome-icons-mapper.dart';
 import 'package:expensemanager/utils/format-utils.dart';
 import 'package:flutter/material.dart';
@@ -71,19 +72,12 @@ class ExpenseTile extends StatelessWidget {
       width: 32,
       height: 32,
       decoration: BoxDecoration(
-        color: fromHex(entity.type!.color!, '30'),
+        color: ColorUtils.fromHex(entity.type!.color!, '30'),
         borderRadius: const BorderRadius.all(Radius.circular(10))
       ),
       child: Center(
-        child: FaIcon(FontAwesomeIconsMapper.getIcon( entity.type!.icon! ), color: fromHex(entity.type!.color!, 'ff'), size: 15),
+        child: FaIcon(FontAwesomeIconsMapper.getIcon( entity.type!.icon! ), color: ColorUtils.fromHex(entity.type!.color!, 'ff'), size: 15),
       )
     );
-  }
-
-  static Color fromHex(String hexString, String alpha) {
-    final buffer = StringBuffer();
-    if (hexString.length == 6 || hexString.length == 7) buffer.write(alpha);
-    buffer.write(hexString.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
   }
 }

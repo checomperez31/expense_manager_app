@@ -11,6 +11,7 @@ class Constants {
   static const String expense = '/api/expense';
   static const String globalStatsByType = '/api/stats/types/global';
   static const String statsByType = '/api/stats/types/period';
+  static const String statsTypeByPeriod = '/api/expense-type-stats/period';
   static const Color primary = Color(0xFF49a660);
   static const Color green = Color(0xff005800);
   static const Color red = Color(0xffFD5D61);

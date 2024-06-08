@@ -17,6 +17,9 @@ class ExpenseFormProvider extends ChangeNotifier {
 
   set account(Account? value) {
     _entity.account = value;
+    if ( _entity.account != null ) {
+      if ( _entity.accountToTransfer != null && _entity.account!.identifier == _entity.accountToTransfer!.identifier ) _entity.accountToTransfer = null;
+    }
     notifyListeners();
   }
 
@@ -47,6 +50,7 @@ class ExpenseFormProvider extends ChangeNotifier {
 
   set movementType(String value) {
     _entity.movementType = value;
+    _entity.accountToTransfer = null;
     notifyListeners();
   }
 
